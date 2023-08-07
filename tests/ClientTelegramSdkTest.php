@@ -23,12 +23,14 @@ class ClientTelegramSdkTest extends \PHPUnit\Framework\TestCase
 
     public function test_sendMessage()
     {
-        $clientDemoSdk = new ClientTelegramSdk(Config::getConfig('telegram-test-sdk'));
+        $config = Config::getConfig('telegram-test-sdk');
+        $clientDemoSdk = new ClientTelegramSdk();
         $sendMessage = $clientDemoSdk->sendMessage(
-            811406378,
-            'hello from ' . __METHOD__,
-            ReplyMarkupHelper::keyboardRemove()
-            //ReplyMarkupHelper::keyboardButtonRequestContact('Отправить свой номер телефона')
+            //$config['chatId_1'], //тест
+            $config['chatId_2'],//тест рабочий
+            __METHOD__,
+            //ReplyMarkupHelper::keyboardRemove()
+            ReplyMarkupHelper::keyboardButtonRequestContact('Отправить свой номер телефона')
         );
         $this->assertTrue(is_array($sendMessage));
     }
